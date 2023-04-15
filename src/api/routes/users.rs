@@ -1,8 +1,8 @@
 use actix_web::{get, HttpResponse, Responder};
-use serde::Deserialize;
+use serde::{Deserialize, Serialize };
 use std::collections::HashMap;
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 struct User {
     id: u64,
     name: String,
@@ -14,7 +14,7 @@ struct User {
     company: Company,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 struct Address {
     street: String,
     suite: String,
@@ -23,13 +23,13 @@ struct Address {
     geo: Geo,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 struct Geo {
     lat: String,
     lng: String,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Deserialize, Serialize)]
 struct Company {
     name: String,
     catchPhrase: String,
@@ -46,5 +46,7 @@ async fn get_users() -> impl Responder {
         .unwrap();
     let mut data = HashMap::new();
     data.insert("users", response);
+    // It's not happy with json coming from actix-web
+    // had to add { Serialize } to every struct
     HttpResponse::Ok().json(data)
 }

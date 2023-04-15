@@ -9,7 +9,7 @@ export function Button() {
 	const [users, setUsers] = createSignal<[] | User[]>([])
 
 	const fetchUsers = async () => {
-		const response = await fetch('/api/users')
+		const response = await fetch('/users')
 		const data = await response.json()
 		setUsers(data)
 	}
