@@ -1,26 +1,44 @@
-import { createSignal } from 'solid-js'
+import { createResource, createSignal, createEffect, Show, For } from 'solid-js'
 
 interface User {
 	id: number
 	name: string
 }
 
-export function Button() {
-	const [users, setUsers] = createSignal<[] | User[]>([])
+const fetchUsers = async () => {
+	const result = await fetch('/users')
 
-	const fetchUsers = async () => {
-		const response = await fetch('/users')
-		const data = await response.json()
-		setUsers(data)
+	if (!result.ok) {
+		throw new Error('Failed to fetch users')
 	}
 
-	console.log(users)
+	const json = await result.json()
+	return json.users.map((user: any) => ({ id: user.id, name: user.name }))
+}
+
+export function Button() {
+	const [trigger, setTrigger] = createSignal(false)
+	// @ts-expect-error - what is typescript anyway
+	const [users] = createResource<User[]>(trigger, fetchUsers)
+
+	createEffect(() => {
+		console.log('loading', users.loading)
+	})
+
 	return (
 		<>
-			<button onClick={fetchUsers}>Fetch me a list of my friends darling</button>
-			{users().map((user) => (
-				<div>{user.name}</div>
-			))}
+			<button onClick={() => setTrigger(true)}>Fetch me a list of my friends darling</button>
+			<Show when={!users.error} fallback={<div>Oh no! An error!</div>}>
+				<ul>
+					<For each={users()}>
+						{(user, i) => (
+							<li>
+								{i() + 1}: {user.name}
+							</li>
+						)}
+					</For>
+				</ul>
+			</Show>
 		</>
 	)
 }
