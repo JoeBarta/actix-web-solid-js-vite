@@ -12,7 +12,7 @@ function App() {
 	)
 }
 
-const elt = document.getElementById('app')
-if (!elt) throw new Error('Cannot find element #root to render app')
+const el = document.getElementById('app')
+if (!el) throw new Error('Cannot find element #app to render app')
 
-render(() => <App />, elt)
+render(() => <App />, el)
