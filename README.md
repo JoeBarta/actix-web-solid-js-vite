@@ -16,8 +16,8 @@ There is a button that you can click to call and it calls https://jsonplaceholde
 
 ### TODO's
 
-[] - add some type of cargo to build ui before each `cargo run` and watch files
-[] - anything to do with a real project or production
+- [ ] add some type of cargo to build ui before each `cargo run` and watch files
+- [ ] anything to do with a real project or production
 
 I'm not going to do any of these.
 
