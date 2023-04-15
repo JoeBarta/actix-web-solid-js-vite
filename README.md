@@ -1,8 +1,10 @@
 # Intro
 
-Rust [Actix web framework](https://github.com/actix/actix-web) serving static [solidjs](https://github.com/solidjs/) files built by [vite](https://github.com/vitejs/vite). By no means it is ready for anything, I only wanted to know I could not if I should.
+Rust [Actix web framework](https://github.com/actix/actix-web) serving static [solidjs](https://github.com/solidjs/) files built by [vite](https://github.com/vitejs/vite). By no means it is ready for anything, there is no SSR for starters. I only wanted to know I could not if I should.
 
-I call it "Rusty Solid" which incidentally would be my adult performer name.
+If you really desire to serve JS using Rust I'd keep an eye on things like [create-rust-app](https://github.com/Wulf/create-rust-app)
+
+For now, I call this "Rusty Solid" which incidentally would be my adult performer name.
 
 ## Why
 
@@ -17,8 +19,9 @@ There is a button that you can click to call and it calls https://jsonplaceholde
 ### TODO's
 
 - [ ] add some type of cargo to build ui before each `cargo run` and watch files
+- [ ] server side generation of our jsx - leverage vite
 - [ ] anything to do with a real project or production
 
-I'm not going to do any of these.
+I currently don't plan on doing any of these
 
 ![Peace out gif](https://media.giphy.com/media/Ru9sjtZ09XOEg/giphy.gif)
